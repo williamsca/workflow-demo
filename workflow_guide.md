@@ -349,11 +349,10 @@ make all
 **Explain:** Clean removes outputs, then rebuilds everything
 
 ### Step 7.7: Demonstrate Make's Intelligence
-```bash
-touch data/raw/sample.csv  # Update timestamp
-make all
-```
-**Point out:** Only analysis reruns, not paper (since paper doesn't depend on data)
+
+Change `program/script.do` so that it plots permits for single-family homes only. Then run ```make paper```
+
+**Check:** `results/figures/permits-year-va.png` and `paper/draft.pdf` should be updated
 
 ---
 
