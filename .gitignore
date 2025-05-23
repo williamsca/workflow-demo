@@ -1,3 +1,15 @@
+# Latex files
+*.aux
+*.bbl
+*.blg
+*.toc
+*.log
+*.out
+*.nav
+*.pdf
+*.snm
+*.synctex.gz
+
 # History files
 .Rhistory
 .Rapp.history
