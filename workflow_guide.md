@@ -204,8 +204,8 @@ git status
 
 ## Section 6: Hands-on Git Exercises
 
-### Exercise 6.0: Import data
-Create a script called `program/[script]` that imports the building permits dataset: `data/building_permits.csv`.
+### Exercise 6.0: Fork demo repo and import data
+Fork the demo repository on GitHub: `williamsca/workflow-demo`. Clone it to a local directory; then, create a Stata script called `program/script.do` that imports the building permits dataset: `data/building_permits.csv`.
 
 ### Exercise 6.1: First Commit
 ```bash
@@ -214,7 +214,7 @@ git status
 **Explain:** Red files are "untracked" or "modified"
 
 ```bash
-git add program/[script]
+git add program/script.do
 git status
 ```
 **Explain:** Green files are "staged" for commit
@@ -269,6 +269,18 @@ git status
 
 ## Section 7: Installing and Using Make
 
+### Step 7.0: Check that Stata runs from the terminal
+```
+stata -b
+```
+
+If this fails: Add path to ~/.zshrc or ~/.bash_profile
+
+```bash
+# Add this line to ~/.zshrc or ~/.bash_profile
+export PATH="/Applications/Stata/StataSE.app/Contents/MacOS:$PATH"
+```
+
 ### Step 7.1: Check if Make is Installed
 ```bash
 make --version
@@ -297,14 +309,14 @@ Review Makefile; explain:
 **Explain:** This rule compiles LaTeX files into PDFs, running BibTeX for references. Wildcards (`$*`) represent the base name of the file; `%.tex` matches any `.tex` file. Add dependencies after the colon.
 
 ### Step 7.4: Create a plot
-Update `/program/[scrit]` to plot total permits for Virginia by year. Save as `results/figures/permits-year-va.png`. Do *not* run the script yet.
+Update `/program/script.do` to plot total permits for Virginia by year. Save as `results/figures/permits-year-va.png`. Do *not* run the script yet.
 
-Add plot to paper.tex:
+Add plot to `paper.tex` and `slides.tex`:
 
 ```latex
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\textwidth]{output/figures/permits-year-va.png}
+  \includegraphics[width=0.8\textwidth]{results/figures/permits-year-va.png}
   \caption{Total building permits in Virginia by year}
   \label{fig:permits-year-va}
 \end{figure}
@@ -313,10 +325,11 @@ Add plot to paper.tex:
 ### Step 7.5: Update Makefile
 Add the following rule to the Makefile:
 ```makefile
-%.pdf: %.tex permits-year-va.png
+%.pdf: %.tex results/figures/permits-year-va.png
 
-permits-year-va.png: program/[script]
-   Rscript program/[script]
+results/figures/permits-year-va.png: program/script.do
+   mkdir -p results/figures
+   stata -b do program/script.do
 ```
 
 **Explain:** This rule specifies that `permits-year-va.png` depends on the R script and that all `.tex` files depend on the generated plot.
@@ -326,7 +339,7 @@ permits-year-va.png: program/[script]
 make paper
 ```
 
-**Check:** `output/figures/plot.png` should be created
+**Check:** `results/figures/plot.png` should be created
 **Check:** `paper/draft.pdf` should be created
 
 ```bash
