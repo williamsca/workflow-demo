@@ -1,12 +1,6 @@
 # Git and Make Workflow Demo Guide
 *For demonstrating version control and automation to research assistants*
 
-## Pre-Demo Preparation
-- [ ] Ensure stable internet connection
-- [ ] Have demo repository ready (see Section 6 setup)
-- [ ] Test all commands on your own machine beforehand
-- [ ] Have backup slides/examples ready in case of technical issues
-
 ---
 
 ## Section 1: Installing Git on Mac
