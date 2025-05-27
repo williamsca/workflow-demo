@@ -1,6 +1,6 @@
 # Output files
 results/
-
+derived/
 # Latex files
 *.aux
 *.bbl
@@ -62,3 +62,4 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
